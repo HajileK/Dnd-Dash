@@ -11,3 +11,96 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* --- micro animations --- */
+@keyframes pop-in {
+    0% { transform: scale(0.92); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+.animate-pop { animation: pop-in .18s ease-out; }
+
+@keyframes bump {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+.animate-bump { animation: bump .18s ease-out; }
+
+@keyframes pulse-outline {
+    0% { box-shadow: 0 0 0 0 rgba(99,102,241,0.45); }
+    100% { box-shadow: 0 0 0 12px rgba(99,102,241,0); }
+}
+.pulse-turn { animation: pulse-outline .6s ease-out; }
+
+/* nice button press */
+button { transition: transform .06s ease; }
+button:active { transform: scale(0.98); }
+
+/* grid fade on updates */
+.fade-container {
+    transition: opacity .5s ease, filter .5s ease;
+}
+.fade-container.fading {
+    opacity: .15;
+    filter: blur(1px);
+}
+
+/* Sticky toolbar */
+.toolbar-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 999;              /* keep above content */
+    backdrop-filter: blur(6px); /* nice frosted effect */
+    background: rgba(248, 250, 252, 0.85); /* matches your bg with translucency */
+    border-bottom: 1px solid #e2e8f0;      /* light divider */
+}
+
+/* Horizontal scroll for lots of buttons on small screens */
+.toolbar-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px; /* space so scrollbar (if any) doesn’t touch buttons */
+}
+
+.toolbar-row > * {
+    flex: 0 0 auto; /* keep each button from squishing */
+}
+
+/* Floating vertical toolbar */
+.floating-toolbar {
+    position: fixed;
+    top: 50%;
+    left: 0;                  /* set to right: 0; for right-side */
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px;
+    background: rgba(248, 250, 252, 0.85);
+    backdrop-filter: blur(6px);
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+
+.floating-toolbar button {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background .15s, transform .1s;
+}
+
+.floating-toolbar button:hover {
+    background: #f1f5f9;
+    transform: scale(1.05);
+}
