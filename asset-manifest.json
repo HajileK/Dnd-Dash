@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Dnd-Dash/static/css/main.882ff97a.css",
-    "main.js": "/Dnd-Dash/static/js/main.44ffe767.js",
+    "main.js": "/Dnd-Dash/static/js/main.f4fa6119.js",
     "static/js/453.11e35462.chunk.js": "/Dnd-Dash/static/js/453.11e35462.chunk.js",
     "index.html": "/Dnd-Dash/index.html",
     "main.882ff97a.css.map": "/Dnd-Dash/static/css/main.882ff97a.css.map",
-    "main.44ffe767.js.map": "/Dnd-Dash/static/js/main.44ffe767.js.map",
+    "main.f4fa6119.js.map": "/Dnd-Dash/static/js/main.f4fa6119.js.map",
     "453.11e35462.chunk.js.map": "/Dnd-Dash/static/js/453.11e35462.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.882ff97a.css",
-    "static/js/main.44ffe767.js"
+    "static/js/main.f4fa6119.js"
   ]
 }
