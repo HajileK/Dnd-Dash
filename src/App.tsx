@@ -79,7 +79,7 @@ export default function App() {
 
     const [npcs, setNpcs] = useState<NPC[]>(() => {
         try {
-            const raw = localStorage.getItem(STORAGE_KEY);
+            const raw = sessionStorage.getItem(STORAGE_KEY);
             return raw ? (JSON.parse(raw) as NPC[]) : [];
         } catch {
             return [];
@@ -107,7 +107,7 @@ export default function App() {
     const inputNameRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(npcs));
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(npcs));
     }, [npcs]);
 
     const currentRowRef = useRef<HTMLDivElement | null>(null);
@@ -159,6 +159,21 @@ export default function App() {
         setJustAddedId(id);
         setTimeout(() => setJustAddedId(null), 300);
         setForm({ name: "", description: "", mod: "", hp: "", maxHp: "", tempHp: "" });
+    }
+
+    function duplicateNPC(id: string) {
+        setNpcs((prev) => {
+            const target = prev.find((n) => n.id === id);
+            if (!target) return prev;
+            const newId = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+            const clone: NPC = {
+                ...target,
+                id: newId,
+                createdAt: Date.now(),
+                name: `${target.name} (copy)`,
+            };
+            return [...prev, clone];
+        });
     }
 
     function setNPC(
@@ -240,10 +255,11 @@ export default function App() {
     function resetAll() {
         if (!window.confirm("Clear all NPCs?")) return;
         setNpcs([]);
-        localStorage.removeItem(STORAGE_KEY);
+        sessionStorage.removeItem(STORAGE_KEY);
         setTurnIndex(0);
         setForm({ name: "", description: "", mod: "", hp: "", maxHp: "", tempHp: "" });
     }
+
 
     //the animations n shit
     const [justAddedId, setJustAddedId] = useState<string | null>(null);
@@ -467,6 +483,7 @@ export default function App() {
                                         <span style={{ color: "#64748b", fontSize: 12 }}>Mod: {n.mod >= 0 ? `+${n.mod}` : n.mod}</span>
                                         <span style={{ color: "#64748b" }}>Init: {n.initiative ?? "—"}</span>
                                         <button onClick={() => rollFor(n.id)} title="Roll">Roll</button>
+                                        <button onClick={() => duplicateNPC(n.id)} title="Duplicate">⧉</button>
                                         <button onClick={() => removeNPC(n.id)} title="Delete">✕</button>
                                     </div>
                                 </div>
@@ -514,6 +531,11 @@ export default function App() {
                                         <button onClick={() => removeNPC(n.id)} title="Delete" style={{ background: "#fff1f2", color: "#e11d48", border: "1px solid #fecdd3", borderRadius: 10, padding: "2px 6px" }}>
                                             ✕
                                         </button>
+                                        <button onClick={() => duplicateNPC(n.id)} title="Duplicate"
+                                                style={{ background: "#f0fdf4", color: "#15803d", border: "1px solid #bbf7d0", borderRadius: 10, padding: "2px 6px" }}>
+                                            ⧉
+                                        </button>
+
                                     </div>
 
                                     <div style={{ marginTop: 10, display: "grid", gridTemplateColumns: "1fr 1fr auto", gap: 8, alignItems: "end" }}>
