@@ -1,18 +1,95 @@
+/* Global body background: shifting neon gradient */
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: linear-gradient(135deg, #1e3a8a, #9333ea, #ec4899);
+    background-size: 200% 200%;
+    animation: gradientShift 20s ease infinite;
+    min-height: 100vh;
+    color: rgba(0, 0, 0, 0.9);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-/* --- micro animations --- */
+/* Glassmorphism container */
+.glass {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* Inputs: subtle glass */
+input {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 4px 6px;
+    color: #000000;
+    backdrop-filter: blur(6px);
+}
+
+input::placeholder {
+    color: rgba(58, 58, 58, 0.7);
+}
+
+/* Buttons: floating glass bubbles */
+button {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 6px 12px;
+    color: #aaa5a5;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.1s ease, background 0.2s ease;
+    backdrop-filter: blur(8px);
+}
+
+button:hover {
+    background: rgba(115, 112, 112, 0.35);
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Floating vertical toolbar */
+.floating-toolbar {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0 12px 12px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 1000;
+}
+
+.floating-toolbar button {
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Animations */
 @keyframes pop-in {
     0% { transform: scale(0.92); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
@@ -27,80 +104,16 @@ code {
 .animate-bump { animation: bump .18s ease-out; }
 
 @keyframes pulse-outline {
-    0% { box-shadow: 0 0 0 0 rgba(99,102,241,0.45); }
-    100% { box-shadow: 0 0 0 12px rgba(99,102,241,0); }
+    0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.6); }
+    100% { box-shadow: 0 0 0 14px rgba(255,255,255,0); }
 }
 .pulse-turn { animation: pulse-outline .6s ease-out; }
 
-/* nice button press */
-button { transition: transform .06s ease; }
-button:active { transform: scale(0.98); }
-
-/* grid fade on updates */
+/* Fade container for smooth updates */
 .fade-container {
-    transition: opacity .5s ease, filter .5s ease;
+    transition: opacity .4s ease, filter .4s ease;
 }
 .fade-container.fading {
     opacity: .15;
-    filter: blur(1px);
-}
-
-/* Sticky toolbar */
-.toolbar-sticky {
-    position: sticky;
-    top: 0;
-    z-index: 999;              /* keep above content */
-    backdrop-filter: blur(6px); /* nice frosted effect */
-    background: rgba(248, 250, 252, 0.85); /* matches your bg with translucency */
-    border-bottom: 1px solid #e2e8f0;      /* light divider */
-}
-
-/* Horizontal scroll for lots of buttons on small screens */
-.toolbar-row {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 8px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 6px; /* space so scrollbar (if any) doesn’t touch buttons */
-}
-
-.toolbar-row > * {
-    flex: 0 0 auto; /* keep each button from squishing */
-}
-
-/* Floating vertical toolbar */
-.floating-toolbar {
-    position: fixed;
-    top: 50%;
-    left: 0;                  /* set to right: 0; for right-side */
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 8px;
-    background: rgba(248, 250, 252, 0.85);
-    backdrop-filter: blur(6px);
-    border-radius: 0 8px 8px 0;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    z-index: 1000;
-}
-
-.floating-toolbar button {
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background .15s, transform .1s;
-}
-
-.floating-toolbar button:hover {
-    background: #f1f5f9;
-    transform: scale(1.05);
+    filter: blur(2px);
 }

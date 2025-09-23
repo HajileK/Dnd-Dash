@@ -316,13 +316,8 @@ export default function App() {
                 {/* Add NPC */}
                 <form
                     onSubmit={addNPC}
-                    style={{
-                        marginBottom: 16,
-                        background: "white",
-                        borderRadius: 12,
-                        padding: 12,
-                        boxShadow: "0 1px 3px rgba(0,0,0,0.08)",
-                    }}
+                    className="glass"
+                    style={{ marginBottom: 16, padding: 12 }}
                 >
                     <div
                         style={{
@@ -378,14 +373,16 @@ export default function App() {
                             Add
                         </button>
                     </div>
+
                     <div style={{ marginTop: 4, fontSize: 12, color: "#64748b" }}>
                         {npcs.length}/200
                     </div>
                 </form>
 
 
+
                 {/* Search */}
-                <div style={{ background: "white", borderRadius: 12, padding: 12, boxShadow: "0 1px 3px rgba(0,0,0,0.08)", marginBottom: 16 }}>
+                <div className="glass" style={{ marginBottom: 16, padding: 12 }}>
                     <input
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
@@ -409,22 +406,16 @@ export default function App() {
                             return (
                                 <div
                                     key={n.id}
-                                    ref={isTurn ? (el) => { currentRowRef.current = el; } : undefined}
-                                    className={`${justAddedId === n.id ? "animate-pop" : ""} ${bumpId === n.id ? "animate-bump" : ""} ${isTurn && turnPulse ? "pulse-turn" : ""}`}
+                                    className={`glass ${justAddedId === n.id ? "animate-pop" : ""} ${bumpId === n.id ? "animate-bump" : ""} ${isTurn && turnPulse ? "pulse-turn" : ""}`}
                                     style={{
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "space-between",
-                                        padding: "2px 6px",
+                                        padding: "6px 8px",
                                         fontSize: 13,
-                                        borderBottom: "1px solid #e2e8f0",
-                                        background: isTurn ? "#eef2ff" : "transparent",
-                                        outline: isTurn ? "1px solid #6366f1" : "none",
-                                        borderRadius: 6,
                                     }}
-                                    title={n.description || ""}
                                 >
-                                    <div style={{ flex: 1, minWidth: 0 }}>
+                                <div style={{ flex: 1, minWidth: 0 }}>
                                         <div
                                             style={{
                                                 fontWeight: isTurn ? 700 : 500,
@@ -498,16 +489,14 @@ export default function App() {
                             return (
                                 <div
                                     key={n.id}
-                                    className={`${justAddedId === n.id ? "animate-pop" : ""} ${bumpId === n.id ? "animate-bump" : ""} ${isTurn && turnPulse ? "pulse-turn" : ""}`}
+                                    className={`glass ${justAddedId === n.id ? "animate-pop" : ""} ${bumpId === n.id ? "animate-bump" : ""} ${isTurn && turnPulse ? "pulse-turn" : ""}`}
                                     style={{
-                                        background: "white",
                                         borderRadius: 16,
                                         padding: 16,
                                         border: `1px solid ${isTurn ? "#6366f1" : "transparent"}`,
-                                        boxShadow: "0 1px 3px rgba(0,0,0,0.08)",
                                     }}
                                 >
-                                    <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 8 }}>
+                                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 8 }}>
                                         <div style={{ flex: 1, minWidth: 0 }}>
                                             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                                                 <input
